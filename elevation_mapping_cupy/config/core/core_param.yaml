@@ -1,4 +1,4 @@
-elevation_mapping_node:
+elevation_mapping:
   ros__parameters:
     #### Basic parameters ########
     voxel_filter_size: 0.1

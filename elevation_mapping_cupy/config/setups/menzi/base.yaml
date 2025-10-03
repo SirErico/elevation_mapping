@@ -11,8 +11,11 @@ elevation_mapping_node:
 
     subscribers:
       front_cam:
-        topic_name: '/ouster_points_self_filtered'
-        data_type: pointcloud
+        topic_name: '/j100_0000/sensors/camera_0/color/image'
+        data_type: image
+      ouster_os1:
+        topic_name: '/j100_0000/sensors/lidar3d_0/points'
+        data_type:  pointcloud  # pointcloud or image
 
     publishers:
       elevation_map_raw:

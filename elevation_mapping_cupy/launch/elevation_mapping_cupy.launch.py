@@ -27,6 +27,10 @@ def generate_launch_description():
                     'example_setup.yaml'
                 ])
             ],
+            remappings=[
+                ('/tf', '/j100_0000/tf'),
+                ('/tf_static', '/j100_0000/tf_static')
+            ],
             output='screen'
         )
     ]) 
