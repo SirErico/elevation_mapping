@@ -12,7 +12,7 @@ ARG ROS_DISTRO=humble
 ARG USERNAME=ros
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
-ARG RMW_NAME=zenoh
+ARG RMW_NAME=cyclonedds
 ARG INSTALL_EMCUPY_ROSDEPS=true
 
 # Environment variables
@@ -137,12 +137,12 @@ RUN if [ "$INSTALL_EMCUPY_ROSDEPS" = true ]; then \
         cupy-cuda12x\
         # rosdep resolves using extra rosdeps
         simple-parsing\
-        # rosdep resolves using extra rosdeps
-        "numpy<2.0.0"; \
+        # rosdep resolves using extra rosdeps - install specific version to avoid conflicts
+        "numpy==1.24.2"; \
     fi
 
 # Needed for elevation_mapping_cupy to not have run-time errors
-RUN python3 -m pip install transforms3d scipy -U
+RUN python3 -m pip install transforms3d scipy ros2_numpy -U
 
 # Set up non-root user
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -193,6 +193,8 @@ RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
         # rosdep grid_map_demos
         ros-${ROS_DISTRO}-grid-map-demos\
         ros-${ROS_DISTRO}-point-cloud-transport\
+        # RQT tools
+        ros-${ROS_DISTRO}-rqt\
         python3-shapely\
         python3-scipy\
         python3-ruamel.yaml\
@@ -222,6 +224,10 @@ COPY src/ ${WORKSPACE}/src/
 # Fix ownership after copying
 RUN chown -R ${USER_UID}:${USER_GID} ${WORKSPACE}/src
 
+# Install Python requirements from requirements.txt
+RUN if [ -f ${WORKSPACE}/src/elevation_mapping_cupy/requirements.txt ]; then \
+        python3 -m pip install -r ${WORKSPACE}/src/elevation_mapping_cupy/requirements.txt; \
+    fi
 
 # Setup rosdep
 RUN rosdep init
@@ -247,8 +253,9 @@ USER $USERNAME
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD ros2 topic list > /dev/null 2>&1 || exit 1
 
-# Set ID to value not used by others on your network
+# Set ROS network configuration
 ENV ROS_DOMAIN_ID=69
+ENV ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 
 # For elevation_mapping_cupy
 ENV TURTLEBOT3_MODEL=waffle_realsense_depth

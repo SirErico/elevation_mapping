@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE_NAME="elevation_mapping_test:latest"
+IMAGE_NAME="elevation_mapping_test1:latest"
 
 # Define environment variables for enabling graphical output for the container.
 XSOCK=/tmp/.X11-unix
@@ -28,7 +28,7 @@ echo "---------------------"
 RUN_COMMAND="docker run \
   --volume=$XSOCK:$XSOCK:rw \
   --volume=$XAUTH:$XAUTH:rw \
-  --volume=$(pwd)/../../..:/home/ros/workspace/src \
+  --volume=$(pwd)/../../..:/home/ros/workspace \
   --env="QT_X11_NO_MITSHM=1" \
   --env="XAUTHORITY=$XAUTH" \
   --env="DISPLAY=$DISPLAY" \
