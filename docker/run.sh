@@ -1,5 +1,5 @@
 #!/bin/bash
-IMAGE_NAME="elevation_mapping_test1:latest"
+IMAGE_NAME="elevation_mapping_test:latest"
 
 # Define environment variables for enabling graphical output for the container.
 XSOCK=/tmp/.X11-unix
