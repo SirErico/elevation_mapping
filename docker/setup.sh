@@ -1,6 +1,6 @@
 #!/bin/bash
 cd ~/workspace
-vcs import < src/elevation_mapping_cupy/docker/src.repos src/ --recursive -w $(($(nproc)/2))
+vcs import < src/elevation_mapping/docker/src.repos src/ --recursive -w $(($(nproc)/2))
 
 sudo apt update
 rosdep update
