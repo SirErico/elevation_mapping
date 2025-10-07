@@ -15,15 +15,6 @@ fi
 #==
 # Launch container
 #==
-
-# # Create symlinks to user configs within the build context.
-# mkdir -p .etc && cd .etc
-# ln -sf /etc/passwd .
-# ln -sf /etc/shadow .
-# ln -sf /etc/group .
-# cd ..
-
-# Launch a container from the prebuilt image.
 echo "---------------------"
 RUN_COMMAND="docker run \
   --volume=$XSOCK:$XSOCK:rw \

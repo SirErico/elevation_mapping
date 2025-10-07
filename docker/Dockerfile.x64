@@ -120,22 +120,12 @@ RUN python3 -m pip install \
     flake8-class-newline\
     flake8-blind-except\
     flake8-quotes
-    # For Python code formatting. Not sure what package uses it
-    # black==21.12b0\
 #### For elevation_mapping_cupy ####
 RUN if [ "$INSTALL_EMCUPY_ROSDEPS" = true ]; then \
         python3 -m pip install \
-        # rosdep resolves with apt python-ruamel.yaml
-        # ruamel.yaml\
-        # rosdep resolves with apt python3-sklearn - might not be needed
         scikit-learn\
-        # rosdep resolves with apt python3-shapely
-        # shapely\
-        # rosdep resolves with apt python3-opencv
         opencv-python\
-        # rosdep resolves using extra rosdeps
         cupy-cuda12x\
-        # rosdep resolves using extra rosdeps
         simple-parsing\
         # rosdep resolves using extra rosdeps - install specific version to avoid conflicts
         "numpy==1.24.2"; \

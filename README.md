@@ -2,6 +2,35 @@
 
 Fork of [elevation_mapping_cupy](https://github.com/leggedrobotics/elevation_mapping_cupy) from the leggedrobotics laboratory. Created for research purposes.
 
+Setup for ROS2 Humble.
+
+## Quick start with Docker
+
+Clone the repository to your workspace:
+
+```bash
+cd ~/ros2_ws/src
+git clone https://github.com/your_username/elevation_mapping_cupy.git
+```
+
+Build the docker image:
+
+```bash
+cd ~/ros2_ws
+docker build -f src/elevation_mapping_cupy/docker/Dockerfile.x64 -t elevation_mapping_test1:latest .
+```
+Then run the container:
+
+```bash
+cd src/elevation_mapping_cupy/docker
+./run.sh
+```
+
+> [!IMPORTANT]
+> Remember to change your ROS_ID -> `export ROS_DOMAIN_ID=your_id`
+
+
+
 
 
 ![python tests](https://github.com/leggedrobotics/elevation_mapping_cupy/actions/workflows/python-tests.yml/badge.svg)
