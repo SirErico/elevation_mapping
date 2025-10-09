@@ -1,5 +1,4 @@
 ###### Requirements without Version Specifiers ######`
-numpy
 scipy
 ruamel.yaml
 opencv-python
@@ -13,3 +12,4 @@ ros2-numpy
 
 ###### Requirements with Version Specifiers ######`
 shapely==1.7.1
+numpy==1.24.2
