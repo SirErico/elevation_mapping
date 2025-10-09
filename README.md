@@ -10,24 +10,32 @@ Clone the repository to your workspace:
 
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com/SirErico/elevation_mapping.git
+git clone https://github.com/SirErico/elevation_mapping_cupy.git
 ```
 
 Build the docker image:
 
 ```bash
 cd ~/ros2_ws
-docker build -f src/elevation_mapping/docker/Dockerfile.x64 -t elevation_mapping_test:latest .
+docker build -f src/elevation_mapping_cupy/docker/Dockerfile.x64 -t elevation_mapping_test:latest .
 ```
 Then run the container:
 
 ```bash
-cd src/elevation_mapping/docker
+cd src/elevation_mapping_cupy/docker
 ./run.sh
 ```
 
 > [!IMPORTANT]
 > Remember to change your ROS_ID -> `export ROS_DOMAIN_ID=your_id`
+
+Build the package:
+
+```bash
+bash src/elevation_mapping_cupy/docker/setup.sh
+colcon build
+source install/setup.bash
+```
 
 
 Run the node:
